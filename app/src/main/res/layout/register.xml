@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="75dp"
+    android:layout_height="match_parent"
+    android:background="@color/md_teal_800"
     android:orientation="vertical">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="100dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/image" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
 
             >
 
@@ -22,7 +34,7 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fullname" />
+                android:hint="Name" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -30,13 +42,14 @@
             android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/input_name">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/register_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username" />
+                android:hint="Email" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -44,7 +57,8 @@
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/input_username"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
 
             >
 
@@ -58,15 +72,16 @@
         </android.support.design.widget.TextInputLayout>
 
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/input_password"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
             android:background="@color/md_teal_600"
-            android:text="Log In" />
+            android:padding="12dp"
+            android:text="Create Account" />
 
-    </RelativeLayout>
+
+    </LinearLayout>
 </LinearLayout>
