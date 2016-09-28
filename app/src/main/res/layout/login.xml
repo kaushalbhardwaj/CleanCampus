@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_teal_800"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
 
@@ -12,26 +12,30 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="100dp">
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
+            android:layout_marginTop="70dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/image" />
+            android:src="@drawable/image"
+            android:layout_weight="0.17" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="50dp">
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textColorHint="@color/lcolor"
                 android:hint="Email" />
 
         </android.support.design.widget.TextInputLayout>
@@ -49,6 +53,8 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textColorHint="@color/lcolor"
                 android:hint="Password"
                 android:inputType="textPassword" />
 
@@ -59,9 +65,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/md_teal_600"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
             android:padding="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="Sign In" />
 
         <TextView
@@ -69,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/lcolor"
             android:text="Not a user of this cool app!!?Register Now" />
 
 
