@@ -2,6 +2,7 @@ package com.cleancampus.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +11,24 @@ import android.widget.TextView;
 
 import com.cleancampus.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Chanpreet on 28-09-2016.
  */
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
-
-    public ComplaintAdapter(Context context1)
+    private ArrayList<Data> list = new ArrayList<>();
+    public ComplaintAdapter(Context context1, ArrayList<Data> list1)
     {
         context = context1;
+        list = list1;
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 10;
     }
 
     @Override
@@ -37,6 +41,9 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        Log.e(list.get(position).getUsername(),"p:"+position);
+        holder.username.setText(list.get(position).getUsername());
+        holder.description.setText(list.get(position).getDescription());
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
