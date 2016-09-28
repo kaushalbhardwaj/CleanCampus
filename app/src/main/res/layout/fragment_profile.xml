@@ -1,14 +1,116 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.Profile">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    tools:context=".fragment.Profile"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_mail_black_envelope_symbol"
+        android:id="@+id/em"
+        android:layout_below="@+id/account"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp" />
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_icon"
+        android:id="@+id/imageView4"
+        android:layout_below="@+id/em"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp" />
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_logout"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:srcCompat="@drawable/img1"
+        android:layout_marginTop="38dp"
+        android:id="@+id/userimageprofile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile"
-        android:gravity="center"
-        android:textSize="20dp"/>
+        android:text="UserName"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernameprofile"
+        android:layout_weight="1"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/userimageprofile"
+        android:layout_centerHorizontal="true" />
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view1"
+        android:background="@color/lcolor"
+        android:layout_below="@+id/usernameprofile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:text="ACCOUNT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/lcolor"
+        android:textSize="15dp"
+        android:id="@+id/account"
+        android:layout_below="@+id/view1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="+91-7597775454"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_toRightOf="@+id/account"
+        android:layout_toEndOf="@+id/account" />
+
+    <TextView
+        android:text="kaushalbhardwaj12@gmail.com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/imageView4"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:text="Signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/imageView5"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+</RelativeLayout>
