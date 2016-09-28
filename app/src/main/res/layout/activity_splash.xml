@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-</LinearLayout>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/imageView"
+        android:layout_marginTop="154dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CleanCampus"
+        android:textSize="20dp"
+        android:textColor="#222222"
+        android:id="@+id/textView"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

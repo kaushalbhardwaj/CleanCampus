@@ -1,0 +1,106 @@
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="2dp"
+    android:layout_gravity="center"
+    app:cardCornerRadius="6dp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/img1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:id="@+id/userimage" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:text="UserName"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:layout_weight="1" />
+
+
+        <TextView
+            android:text="Supplemental actions can vary from card to card in a collection, depending on the content type and expected outcome; "
+            android:layout_width="match_parent"
+            android:textColor="#424242"
+            android:layout_marginTop="8dp"
+            android:textSize="12dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:layout_weight="1" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#424242"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/ic_favorite_border"
+            android:id="@+id/like"/>
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/ic_bookmark_border_black_24px"
+            android:id="@+id/bookmark"/>
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/ic_share_black_24px"
+            android:id="@+id/share"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/ic_query_builder_black_24px"
+            android:id="@+id/status"/>
+    </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

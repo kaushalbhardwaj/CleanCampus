@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager =(ViewPager) findViewById(R.id.viewpager);
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("CleanCampus");
+
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.addFragment(new Complaint(), "Complaint");
         mainAdapter.addFragment(new Feed(), "Feed");
