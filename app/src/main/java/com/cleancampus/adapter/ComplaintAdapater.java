@@ -16,7 +16,8 @@ import com.cleancampus.fragment.Complaint;
 public class ComplaintAdapater extends RecyclerView.Adapter {
 
     private Context context;
-    ComplaintAdapater(Context context1)
+
+   public  ComplaintAdapater(Context context1)
     {
         context = context1;
     }

@@ -4,5 +4,10 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Motivation">
 
-
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="Motivation"
+      android:textSize="20dp" />
 </FrameLayout>
