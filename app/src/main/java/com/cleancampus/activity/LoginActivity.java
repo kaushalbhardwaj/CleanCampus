@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.cleancampus.R;
 
@@ -15,7 +16,7 @@ import com.cleancampus.R;
  */
 public class LoginActivity extends AppCompatActivity {
     private Button login;
-    private Button register;
+    private TextView registerText;
     private EditText username;
     private EditText password;
     @Override
@@ -23,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         login =(Button)findViewById(R.id.login_button);
-        register=(Button) findViewById(R.id.signup);
+        registerText =(TextView) findViewById(R.id.register_text);
         username =(EditText) findViewById(R.id.username);
         password =(EditText) findViewById(R.id.password);
         login.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+       registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent registerIntent = new Intent(getApplicationContext(),RegisterActivity.class);
