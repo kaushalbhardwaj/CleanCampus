@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#777777</color>
-    <color name="colorAccent">#009688</color>
+    <color name="colorPrimary">#36465D</color>
+    <color name="colorPrimaryDark">#2B384A</color>
+    <color name="colorAccent">#529ECC</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+
+    <!-- Main colors to be used in app -->
+    <color name="ycolor">#F7DD38</color>
+    <color name="gcolor">#56BC8A</color>
+    <color name="ocolor">#F2992E</color>
+    <color name="pcolor">#A77DC2</color>
+    <color name="rcolor">#D95E40</color>
+    <color name="grcolor">#9BA3AE</color>
+    <color name="tcolor">#00A6A7</color>
 
 
     <color name="float_transparent">#00000000</color>
