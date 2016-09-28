@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.cleancampus.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Chanpreet on 28-09-2016.
  */
