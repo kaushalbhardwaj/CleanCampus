@@ -1,5 +1,6 @@
 package com.cleancampus.activity;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("CleanCampus");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.addFragment(new Complaint(), "Complaint");

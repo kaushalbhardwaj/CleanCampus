@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.cleancampus.R;
 import com.cleancampus.adapter.ComplaintAdapter;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,7 +28,11 @@ public class Complaint extends Fragment {
                              Bundle savedInstanceState) {
         View complaintView = inflater.inflate(R.layout.fragment_complaint, container, false);
         recyclerView = (RecyclerView) complaintView.findViewById(R.id.recyler_complaint);
-        adapter = new ComplaintAdapter(getContext());
+        ArrayList<String> ad=new ArrayList<String>();
+        ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");
+        ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");
+        ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");ad.add("adgjdj");
+        adapter = new ComplaintAdapter(getContext(),ad);
         linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);

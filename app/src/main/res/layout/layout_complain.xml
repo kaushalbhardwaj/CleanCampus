@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="2dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     android:layout_gravity="center"
-    app:cardCornerRadius="6dp"
+    app:cardCornerRadius="3dp"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -17,7 +19,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="130dp">
+        android:layout_height="140dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="60dp"
@@ -78,30 +80,30 @@
 
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             app:srcCompat="@drawable/ic_favorite_border"
             android:id="@+id/like"/>
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             app:srcCompat="@drawable/ic_bookmark_border_black_24px"
             android:id="@+id/bookmark"/>
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             app:srcCompat="@drawable/ic_share_black_24px"
             android:id="@+id/share"/>
     </LinearLayout>
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"

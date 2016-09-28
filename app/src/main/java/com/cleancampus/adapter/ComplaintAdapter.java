@@ -18,15 +18,17 @@ import java.util.ArrayList;
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
+    ArrayList<String> ad1=null;
 
-    public ComplaintAdapter(Context context1)
+    public ComplaintAdapter(Context context1,ArrayList<String> ad)
     {
         context = context1;
+        ad1=ad;
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 10;
     }
 
     @Override
@@ -39,6 +41,25 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        int c=position%4;
+        switch (c)
+        {
+            case 0:
+                holder.userimage.setImageResource(R.drawable.img1);
+                break;
+            case 1:
+                holder.userimage.setImageResource(R.drawable.img2);
+                break;
+            case 2:
+                holder.userimage.setImageResource(R.drawable.img3);
+                break;
+            case 3:
+                holder.userimage.setImageResource(R.drawable.img4);
+                break;
+            default:
+                holder.userimage.setImageResource(R.drawable.img1);
+
+        }
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
