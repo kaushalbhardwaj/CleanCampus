@@ -5,11 +5,9 @@
     tools:context=".fragment.Complaint">
 
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyler_complaint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Complaint"
-        android:textSize="20dp" />
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
