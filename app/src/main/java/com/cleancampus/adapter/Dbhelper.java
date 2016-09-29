@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,9 +36,12 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     private static final String KEY_DATE="date";
 
-    private SQLiteDatabase db ;
-    public Dbhelper(Context context) {
-        super(context,DATABASE_NAME,null, DATABASE_VERSION);
+    private static  Context context;
+
+    private SQLiteDatabase db = getWritableDatabase() ;
+    public Dbhelper( Context context1) {
+        super(context1,DATABASE_NAME,null, DATABASE_VERSION);
+        context = context1;
     }
     @Override
     public void onCreate(SQLiteDatabase dbname) {
@@ -50,27 +54,28 @@ public class Dbhelper extends SQLiteOpenHelper {
         dbname.execSQL(sql);
         Data dt = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
         add(dt);
-        Data dt2 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt2 = new Data("Mahesh","","mahesh.kabra@gmail.com","default title","default description",0,"28 september");
         add(dt2);
-        Data dt3 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt3 = new Data("Kaushal","","kaushal.nak@gmail.com","default title","default description",2,"28 september");
         add(dt3);
-        Data dt4 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt4 = new Data("Anshul","","ansh.goyal@gmail.com","default title","default description",0,"28 september");
         add(dt4);
-        Data dt5 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt5 = new Data("Jai","","jai.kamchor@gmail.com","default title","default description",1,"28 september");
         add(dt5);
-        Data dt6 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt6 = new Data("Hina","","hina.varshney@gmail.com","default title","default description",2,"28 september");
         add(dt6);
-        Data dt7 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt7 = new Data("Badal","","badal.sharma@gmail.com","default title","default description",1,"28 september");
         add(dt7);
-        Data dt8 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt8 = new Data("Arush","","arush.goyal@gmail.com","default title","default description",0,"28 september");
         add(dt8);
-        Data dt9 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt9 = new Data("Suyash","","suyash.example@gmail.com","default title","default description",2,"28 september");
         add(dt9);
-        Data dt0 = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt0 = new Data("Ankit","","ankit.sleepy@gmail.com","default title","default description",0,"28 september");
         add(dt0);
 
     }
-    private void add(Data data)
+
+    public void add(Data data)
     {
         ContentValues cv = new ContentValues();
         cv.put(KEY_USERNAME,data.getUsername());
@@ -81,6 +86,7 @@ public class Dbhelper extends SQLiteOpenHelper {
         cv.put(KEY_STATUS,data.getStatus());
         cv.put(KEY_DATE,data.getDate());
         db.insert(TABLE_NAME,null,cv);
+        Toast.makeText(context,"Complaint Registered",Toast.LENGTH_LONG).show();
     }
 
 
@@ -111,6 +117,18 @@ public class Dbhelper extends SQLiteOpenHelper {
             while(cursor.moveToNext());
         }
         return list;
+    }
+
+    public void insertIntoDB(String compliant , String description,Context context){
+
+        if(compliant.equals("") || description.equals("")){
+            Toast.makeText(context,"Please fill all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String query = "INSERT INTO "+TABLE_NAME+" ("+KEY_TITLE+","+KEY_DECRIPTION+") VALUES('"+compliant+"', '"+description+"');";
+        db.execSQL(query);
+        Toast.makeText(context,"Saved Successfully", Toast.LENGTH_LONG).show();
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

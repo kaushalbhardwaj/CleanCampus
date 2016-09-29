@@ -16,7 +16,7 @@ public class Data {
 
 
 
-    Data()
+   public  Data()
     {
         id =0;
 
@@ -28,7 +28,7 @@ public class Data {
         date ="";
         status =0;
     }
-    Data(String username1, String location1, String email1,String title1, String description1, int status1, String date1)
+    public Data(String username1, String location1, String email1,String title1, String description1, int status1, String date1)
     {
         username = username1;
         location = location1;

@@ -25,11 +25,12 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         context = context1;
         list = list1;
     }
-
     @Override
     public int getItemCount() {
-        return 10;
+        return(null != list?list.size():0);
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -94,6 +95,12 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         });
 
 
+
+    }
+    public void notifyData(ArrayList<Data> myList) {
+        Log.d("notifyData ", myList.size() + "");
+        this.list = myList;
+        notifyDataSetChanged();
     }
 
     protected  class ViewHolder extends RecyclerView.ViewHolder
