@@ -2,6 +2,7 @@ package com.cleancampus.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +19,18 @@ import java.util.ArrayList;
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
-    ArrayList<String> ad1=null;
-
-    public ComplaintAdapter(Context context1,ArrayList<String> ad)
+    private ArrayList<Data> list = new ArrayList<>();
+    public ComplaintAdapter(Context context1, ArrayList<Data> list1)
     {
         context = context1;
-        ad1=ad;
+        list = list1;
     }
-
     @Override
     public int getItemCount() {
-        return 10;
+        return(null != list?list.size():0);
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,6 +42,9 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        Log.e(list.get(position).getUsername(),"p:"+position);
+        holder.username.setText(list.get(position).getUsername());
+        holder.description.setText(list.get(position).getDescription());
         int c=position%4;
         switch (c)
         {
@@ -110,6 +114,12 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         });
 
 
+
+    }
+    public void notifyData(ArrayList<Data> myList) {
+        Log.d("notifyData ", myList.size() + "");
+        this.list = myList;
+        notifyDataSetChanged();
     }
 
     protected  class ViewHolder extends RecyclerView.ViewHolder
