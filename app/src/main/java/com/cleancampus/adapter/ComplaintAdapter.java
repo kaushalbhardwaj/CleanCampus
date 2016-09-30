@@ -13,9 +13,7 @@ import com.cleancampus.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Chanpreet on 28-09-2016.
- */
+
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
