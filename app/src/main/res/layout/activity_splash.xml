@@ -23,8 +23,7 @@
         android:layout_height="150dp"
         android:id="@+id/imageView"
         app:srcCompat="@drawable/logocc"
-        android:layout_marginBottom="10dp"
         android:layout_above="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 </RelativeLayout>

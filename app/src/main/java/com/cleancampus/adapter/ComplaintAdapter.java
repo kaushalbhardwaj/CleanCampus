@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cleancampus.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
@@ -22,6 +23,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     {
         context = context1;
         list = list1;
+        Collections.reverse(list1);
     }
     @Override
     public int getItemCount() {
@@ -43,6 +45,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         Log.e(list.get(position).getUsername(),"p:"+position);
         holder.username.setText(list.get(position).getUsername());
         holder.description.setText(list.get(position).getDescription());
+        holder.username.setText(list.get(position).getUsername());
         int c=position%4;
         switch (c)
         {

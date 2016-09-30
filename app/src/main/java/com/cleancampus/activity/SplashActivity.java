@@ -24,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
         setStatusBarColor("#33465D");
+        final UserInfo u=SharedPreference.getSharedPreferInfo(SplashActivity.this);
 
         splash = new Thread() {
             public void run() {
@@ -32,9 +33,27 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(mainIntent);
-                    finish();
+
+                    try{
+                    if(u.getEmailId().equals("")||u==null) {
+                        Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+                    }
+                    else {
+                        Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+                    }}
+                    catch (Exception e)
+                    {
+                        Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(mainIntent);
+                        finish();
+
+
+                    }
                 }
             }
         };

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleancampus.R;
+import com.cleancampus.activity.SharedPreference;
+import com.cleancampus.activity.UserInfo;
 import com.cleancampus.adapter.ComplaintAdapter;
 import com.cleancampus.adapter.Data;
 import com.cleancampus.adapter.Dbhelper;
@@ -44,7 +46,8 @@ public class Complaint extends Fragment {
                              Bundle savedInstanceState) {
         final View complaintView = inflater.inflate(R.layout.fragment_complaint, container, false);
 
-        final Dbhelper dbhelper = new Dbhelper(getContext());
+        final Dbhelper dbhelper = new Dbhelper(getActivity().getApplicationContext());
+
         list = dbhelper.getData();
 
         recyclerView = (RecyclerView) complaintView.findViewById(R.id.recyler_complaint);
@@ -56,6 +59,7 @@ public class Complaint extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        final UserInfo u= SharedPreference.getSharedPreferInfo(getActivity().getApplicationContext());
         fab = (FloatingActionButton) complaintView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +74,8 @@ public class Complaint extends Fragment {
                         EditText complaint = (EditText) f.findViewById(R.id.complaint);
                         EditText description = (EditText) f.findViewById(R.id.description);
 
-                        Data data = new Data("", "", "", complaint.getText().toString(), description.getText().toString(), 0, "");
+
+                        Data data = new Data(u.getUserName(), "", u.getEmailId(), complaint.getText().toString(), description.getText().toString(), 0, "");
                         dbhelper.add(data);
                         list.add(0, data);
                         adapter.notifyItemInserted(0);

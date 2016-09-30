@@ -52,25 +52,25 @@ public class Dbhelper extends SQLiteOpenHelper {
                 + " TEXT, " + KEY_LOCATION+ " TEXT, "+KEY_EMAIL +" TEXT, "
                 +KEY_TITLE +" TEXT, "+KEY_DECRIPTION+" TEXT, "+KEY_STATUS+" INTEGER, "+KEY_DATE+" TEXT )";
         dbname.execSQL(sql);
-        Data dt = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","default title","default description",1,"28 september");
+        Data dt = new Data("Chanpreet","","chanpreet.chhabra@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",1,"28 september");
         add(dt);
-        Data dt2 = new Data("Mahesh","","mahesh.kabra@gmail.com","default title","default description",0,"28 september");
+        Data dt2 = new Data("Mahesh","","mahesh.kabra@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",0,"28 september");
         add(dt2);
-        Data dt3 = new Data("Kaushal","","kaushal.nak@gmail.com","default title","default description",2,"28 september");
+        Data dt3 = new Data("Kaushal","","kaushal.nak@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",2,"28 september");
         add(dt3);
-        Data dt4 = new Data("Anshul","","ansh.goyal@gmail.com","default title","default description",0,"28 september");
+        Data dt4 = new Data("Anshul","","ansh.goyal@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",0,"28 september");
         add(dt4);
-        Data dt5 = new Data("Jai","","jai.kamchor@gmail.com","default title","default description",1,"28 september");
+        Data dt5 = new Data("Jai","","jai.kamchor@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",1,"28 september");
         add(dt5);
-        Data dt6 = new Data("Hina","","hina.varshney@gmail.com","default title","default description",2,"28 september");
+        Data dt6 = new Data("Hina","","hina.varshney@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",2,"28 september");
         add(dt6);
-        Data dt7 = new Data("Badal","","badal.sharma@gmail.com","default title","default description",1,"28 september");
+        Data dt7 = new Data("Badal","","badal.sharma@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",1,"28 september");
         add(dt7);
-        Data dt8 = new Data("Arush","","arush.goyal@gmail.com","default title","default description",0,"28 september");
+        Data dt8 = new Data("Arush","","arush.goyal@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",0,"28 september");
         add(dt8);
-        Data dt9 = new Data("Suyash","","suyash.example@gmail.com","default title","default description",2,"28 september");
+        Data dt9 = new Data("Suyash","","suyash.example@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",2,"28 september");
         add(dt9);
-        Data dt0 = new Data("Ankit","","ankit.sleepy@gmail.com","default title","default description",0,"28 september");
+        Data dt0 = new Data("Ankit","","ankit.sleepy@gmail.com","Complaint title","Here is the description of complain that where is the garbage and information",0,"28 september");
         add(dt0);
 
     }
@@ -86,7 +86,7 @@ public class Dbhelper extends SQLiteOpenHelper {
         cv.put(KEY_STATUS,data.getStatus());
         cv.put(KEY_DATE,data.getDate());
         db.insert(TABLE_NAME,null,cv);
-        Toast.makeText(context,"Complaint Registered",Toast.LENGTH_LONG).show();
+        //Toast.makeText(context,"Complaint Registered",Toast.LENGTH_LONG).show();
     }
 
 
@@ -128,7 +128,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         String query = "INSERT INTO "+TABLE_NAME+" ("+KEY_TITLE+","+KEY_DECRIPTION+") VALUES('"+compliant+"', '"+description+"');";
         db.execSQL(query);
-        Toast.makeText(context,"Saved Successfully", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context,"Saved Successfully", Toast.LENGTH_LONG).show();
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

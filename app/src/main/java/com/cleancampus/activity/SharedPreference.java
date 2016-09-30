@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 public class SharedPreference {
 
-    public static final String MyPREFERENCES = "UserInfo" ;
+    public static final String MyPREFERENCES = "UserInfo1" ;
     public static SharedPreferences sharedpreferences;
     public static boolean putSharedPreferInfo(Context con,UserInfo u)
     {
