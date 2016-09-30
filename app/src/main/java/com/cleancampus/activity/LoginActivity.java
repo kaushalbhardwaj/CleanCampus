@@ -17,7 +17,7 @@ import com.cleancampus.R;
 public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView registerText;
-    private EditText username;
+    private EditText email;
     private EditText password;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,13 +25,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login);
         login =(Button)findViewById(R.id.login_button);
         registerText =(TextView) findViewById(R.id.register_text);
-        username =(EditText) findViewById(R.id.username);
+        email =(EditText) findViewById(R.id.username);
         password =(EditText) findViewById(R.id.password);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserInfo u=new UserInfo();
+                u.setUserName(email.getText().toString());
+                u.setEmailId(email.getText().toString());
+                SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
                 Intent loginIntent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(loginIntent);
+                finish();
 
             }
         });

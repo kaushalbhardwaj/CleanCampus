@@ -16,7 +16,7 @@ import com.cleancampus.R;
  */
 public class RegisterActivity extends AppCompatActivity{
     private Button register;
-    private EditText username;
+    private EditText email;
     private EditText password;
     private EditText name;
     @Override
@@ -24,14 +24,19 @@ public class RegisterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         register =(Button) findViewById(R.id.register);
-        username =(EditText) findViewById(R.id.register_username);
+        email =(EditText) findViewById(R.id.register_username);
         password =(EditText) findViewById(R.id.register_password);
         name =(EditText) findViewById(R.id.name);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UserInfo u=new UserInfo();
+                u.setEmailId(email.getText().toString());
+                u.setUserName(name.getText().toString());
+                SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
                 Intent registerIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
     }

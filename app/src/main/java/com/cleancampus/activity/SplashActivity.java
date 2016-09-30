@@ -16,14 +16,14 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class SplashActivity extends AppCompatActivity {
 
     private Thread splash;
-    private int sleepTime=100;
+    private int sleepTime=1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash);
-        setStatusBarColor("#009688");
+        setStatusBarColor("#33465D");
 
         splash = new Thread() {
             public void run() {
