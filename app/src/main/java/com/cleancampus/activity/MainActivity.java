@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.cleancampus.R;
 import com.cleancampus.adapter.MainAdapter;
@@ -19,18 +20,19 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private TextView tabTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        tabTitle = (TextView) findViewById(R.id.tab_title);
+        //toolbar =(Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager =(ViewPager) findViewById(R.id.viewpager);
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("CleanCampus");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle("CleanCampus");
+        //toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.addFragment(new Complaint(),"");
@@ -50,6 +52,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+                switch(tab.getPosition())
+                {
+                    case 0:
+                        tabTitle.setText("Complaint");
+                        break;
+                    case 1:
+                        tabTitle.setText("Tips");
+                        break;
+                    case 2:
+                        tabTitle.setText("Activity Feed");
+                        break;
+                    case 3:
+                        tabTitle.setText("Profile");
+                        break;
+                    default:
+                        tabTitle.setText("none");
+                        break;
+                }
 
             }
 

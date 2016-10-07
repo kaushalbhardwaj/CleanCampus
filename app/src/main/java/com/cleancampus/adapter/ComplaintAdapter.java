@@ -15,8 +15,6 @@ import com.cleancampus.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.cleancampus.R.id.imageView;
-
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 

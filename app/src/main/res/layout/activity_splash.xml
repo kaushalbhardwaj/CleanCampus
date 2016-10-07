@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/t21"
+    android:background="@drawable/cleancampus"
     android:paddingRight="@dimen/activity_horizontal_margin">
 
     <View
@@ -16,13 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CleanCampus"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:textColor="@color/white"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="162dp" />
 
-    <android.support.v7.widget.AppCompatImageView
+    android.support.v7.widget.AppCompatImageView
         android:layout_width="130dp"
         android:layout_height="150dp"
         android:id="@+id/imageView"

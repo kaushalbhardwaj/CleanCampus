@@ -77,6 +77,7 @@ public class Complaint extends Fragment {
 
                         Data data = new Data(u.getUserName(), "", u.getEmailId(), complaint.getText().toString(), description.getText().toString(), 0, "");
                         dbhelper.add(data);
+                        Toast.makeText(getActivity().getApplicationContext(), "Complaint Registered", Toast.LENGTH_SHORT).show();
                         list.add(0, data);
                         adapter.notifyItemInserted(0);
                         recyclerView.scrollToPosition(0);
