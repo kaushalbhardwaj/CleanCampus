@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
                     sleep(sleepTime);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    e.printStackTrace( );
                 } finally {
 
                     try{

@@ -1,6 +1,7 @@
 package com.cleancampus.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import com.cleancampus.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static com.cleancampus.R.id.imageView;
 
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
@@ -41,11 +44,12 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        final int pos=position;
 
         Log.e(list.get(position).getUsername(),"p:"+position);
         holder.username.setText(list.get(position).getUsername());
         holder.description.setText(list.get(position).getDescription());
-        holder.username.setText(list.get(position).getUsername());
+        holder.title.setText(list.get(position).getTitle());
         int c=position%4;
         switch (c)
         {
@@ -65,6 +69,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 holder.userimage.setImageResource(R.drawable.img1);
 
         }
+        //holder.like.setImageResource(R.drawable.ic_favorite_black);
         holder.username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,9 +91,11 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             }
         });
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        /*holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ImageView img1=(ImageView)view;
+
 
             }
         });
@@ -98,11 +105,17 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             public void onClick(View view) {
 
             }
-        });
+        });*/
 
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(pos).getDescription());
+                //shareIntent.putExtra(Intent.EXTRA_STREAM, context.uriToImage);
+                shareIntent.setType("image/jpeg");
+                context.startActivity(Intent.createChooser(shareIntent, "Share Complaint With"));
 
             }
         });
@@ -127,6 +140,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     {
         private TextView username;
         private TextView description;
+        private TextView title;
         private ImageView userimage;
         private ImageView like;
         private ImageView bookmark;
@@ -138,9 +152,10 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             super(view);
             username =(TextView)view.findViewById(R.id.username);
             description =(TextView)view.findViewById(R.id.description);
+            title =(TextView)view.findViewById(R.id.title);
             userimage =(ImageView) view.findViewById(R.id.userimage);
-            like =(ImageView) view.findViewById(R.id.like);
-            bookmark =(ImageView) view.findViewById(R.id.bookmark);
+            /*like =(ImageView) view.findViewById(R.id.like);
+            bookmark =(ImageView) view.findViewById(R.id.bookmark);*/
             share =(ImageView) view.findViewById(R.id.share);
             status =(ImageView) view.findViewById(R.id.status);
         }

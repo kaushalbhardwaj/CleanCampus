@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mainAdapter.addFragment(new Complaint(), "Complaint");
         mainAdapter.addFragment(new Feed(), "Feed");
-        mainAdapter.addFragment(new Motivation(), "Motivation");
+        mainAdapter.addFragment(new Motivation(), "Tips");
         mainAdapter.addFragment(new Profile(),"Profile");
 
         viewPager.setAdapter(mainAdapter);

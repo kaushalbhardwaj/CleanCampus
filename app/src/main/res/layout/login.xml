@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textColorHint="@color/lcolor"
-                android:hint="Email" />
+                android:hint="Username" />
 
         </android.support.design.widget.TextInputLayout>
 

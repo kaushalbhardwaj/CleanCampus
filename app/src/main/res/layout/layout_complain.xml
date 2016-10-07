@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="2dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_gravity="center"
@@ -19,11 +21,11 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="140dp">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:srcCompat="@drawable/img1"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
@@ -34,7 +36,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_height="wrap_content">
 
 
@@ -50,18 +52,36 @@
 
 
         <TextView
-            android:text="Supplemental actions can vary from card to card in a collection, depending on the content type and expected outcome; "
+            android:text="Title"
             android:layout_width="match_parent"
             android:layout_marginRight="15dp"
+            android:layout_marginLeft="2dp"
             android:textColor="#424242"
-            android:layout_marginTop="8dp"
-            android:textSize="12dp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:textSize="15dp"
             android:layout_height="wrap_content"
-            android:id="@+id/description"
+            android:id="@+id/title"
             android:layout_weight="1" />
 
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <TextView
+            android:text="Supplemental actions can vary from card to card in a collection, depending on the content type and expected outcome;"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#424242"
+            android:textSize="15dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            />
+        </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -76,23 +96,31 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="45dp">
 
 
-        <android.support.v7.widget.AppCompatImageView
+        <ToggleButton
+            android:id="@+id/like"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            app:srcCompat="@drawable/ic_favorite_border"
-            android:id="@+id/like"/>
-        <android.support.v7.widget.AppCompatImageView
+            android:background="@drawable/like_toggle"
+            android:textOn=""
+            android:textOff=""
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+        <ToggleButton
+            android:id="@+id/bookmark"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            app:srcCompat="@drawable/ic_bookmark_border_black_24px"
-            android:id="@+id/bookmark"/>
+            android:background="@drawable/bookmark_toggle"
+            android:textOn=""
+            android:textOff=""
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="28dp"
             android:layout_height="28dp"

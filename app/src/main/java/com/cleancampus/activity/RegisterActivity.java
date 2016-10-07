@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.cleancampus.R;
 
@@ -30,11 +31,12 @@ public class RegisterActivity extends AppCompatActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserInfo u=new UserInfo();
+                /*UserInfo u=new UserInfo();
                 u.setEmailId(email.getText().toString());
                 u.setUserName(name.getText().toString());
-                SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
-                Intent registerIntent = new Intent(getApplicationContext(), MainActivity.class);
+                SharedPreference.putSharedPreferInfo(getApplicationContext(),u);*/
+                Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_LONG).show();
+                Intent registerIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(registerIntent);
                 finish();
             }

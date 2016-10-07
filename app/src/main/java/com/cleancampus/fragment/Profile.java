@@ -41,7 +41,7 @@ public class Profile extends Fragment {
         email=(TextView)v.findViewById(R.id.textView2);
         UserInfo u= SharedPreference.getSharedPreferInfo(getActivity().getApplicationContext());
         userName.setText(u.getUserName());
-        email.setText(u.getEmailId());
+        email.setText(u.getEmailId()+"@gmail.com");
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
