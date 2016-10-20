@@ -1,5 +1,4 @@
-package com.cleancampus.fragment;
-
+package com.cleancampus.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,21 +9,17 @@ import android.view.ViewGroup;
 import com.cleancampus.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by khome on 20/10/16.
  */
-public class Motivation extends Fragment {
 
-
-    public Motivation() {
-        // Required empty public constructor
-    }
-
+public class ScreenSlidePageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_motivation, container, false);
-    }
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.fragment_screen_slide_page, container, false);
 
+        return rootView;
+    }
 }

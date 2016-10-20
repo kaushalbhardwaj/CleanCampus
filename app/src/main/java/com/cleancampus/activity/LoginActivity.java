@@ -1,15 +1,29 @@
 package com.cleancampus.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cleancampus.R;
+import com.cleancampus.response.LoginResponse;
+import com.cleancampus.rest.ApiClient;
+import com.cleancampus.rest.ApiInterface;
+import com.cleancampus.tools.Tools;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Chanpreet on 27-09-2016.
@@ -19,10 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextView registerText;
     private EditText email;
     private EditText password;
+    ProgressDialog pd;
+    @BindView(R.id.c_layout)
+    CoordinatorLayout clayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
         login =(Button)findViewById(R.id.login_button);
         registerText =(TextView) findViewById(R.id.register_text);
         email =(EditText) findViewById(R.id.username);
@@ -30,13 +48,54 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserInfo u=new UserInfo();
-                u.setUserName(email.getText().toString());
-                u.setEmailId(email.getText().toString());
-                SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
-                Intent loginIntent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(loginIntent);
-                finish();
+
+                pd = Tools.getProgressDialog(LoginActivity.this);
+                pd.show();
+                ApiInterface apiService =
+                        ApiClient.getClient().create(ApiInterface.class);
+                Call<LoginResponse> call = apiService.signin(email.getText().toString(),password.getText().toString());
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse>call, Response<LoginResponse> response) {
+                        pd.dismiss();
+                        if(response.isSuccessful())
+                        {
+                            Log.e("login",response.body().getToken());
+                            UserInfo u=new UserInfo();
+                            String a[]=email.getText().toString().split("@");
+                            u.setEmailId(email.getText().toString());
+                            u.setUserName(a[0]);
+                            SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
+                            Intent loginIntent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(loginIntent);
+                            finish();
+
+
+                        }
+                        else
+                        {
+                            Log.e("login",response.toString());
+
+                            Snackbar snackbar = Snackbar
+                                    .make(clayout, "Wrong Username or Password!!", Snackbar.LENGTH_LONG);
+
+                            snackbar.show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse>call, Throwable t) {
+                        Log.e("activity_login", t.toString());
+                        pd.dismiss();
+                        Snackbar snackbar = Snackbar
+                                .make(clayout, "Can't connect to Internet!!", Snackbar.LENGTH_LONG);
+
+                        snackbar.show();
+                    }
+                });
+
 
             }
         });

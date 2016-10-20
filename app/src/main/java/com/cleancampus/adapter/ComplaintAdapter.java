@@ -115,7 +115,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(pos).getDescription());
                 //shareIntent.putExtra(Intent.EXTRA_STREAM, context.uriToImage);
                 shareIntent.setType("image/jpeg");
-                context.startActivity(Intent.createChooser(shareIntent, "Share Complaint With"));
+                context.startActivity(Intent.createChooser(shareIntent, "Share ComplaintFragment With"));
 
             }
         });

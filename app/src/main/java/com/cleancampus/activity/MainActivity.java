@@ -2,6 +2,7 @@ package com.cleancampus.activity;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,20 +11,26 @@ import android.support.v7.widget.Toolbar;
 
 import com.cleancampus.R;
 import com.cleancampus.adapter.MainAdapter;
-import com.cleancampus.fragment.Complaint;
+import com.cleancampus.fragment.ComplaintFragment;
 import com.cleancampus.fragment.Feed;
-import com.cleancampus.fragment.Motivation;
+import com.cleancampus.fragment.TipsFragment;
 import com.cleancampus.fragment.Profile;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    @BindView(R.id.c_layout)
+    CoordinatorLayout c_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         toolbar =(Toolbar) findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager =(ViewPager) findViewById(R.id.viewpager);
@@ -33,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
-        mainAdapter.addFragment(new Complaint(),"");
+        mainAdapter.addFragment(new ComplaintFragment(),"");
         mainAdapter.addFragment(new Feed(),"");
-        mainAdapter.addFragment(new Motivation(), "");
+        mainAdapter.addFragment(new TipsFragment(), "");
         mainAdapter.addFragment(new Profile(),"");
 
         viewPager.setAdapter(mainAdapter);

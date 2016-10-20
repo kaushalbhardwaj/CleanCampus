@@ -4,30 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/t21"
+    android:background="@drawable/splashmain"
     android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00424242"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CleanCampus"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:background="#44424242"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="130dp"
         android:layout_height="150dp"
         android:id="@+id/imageView"
         app:srcCompat="@drawable/logocc"
-        android:layout_above="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+
+    <TextView
+        android:text="CleanCampus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:id="@+id/textView" />
 </RelativeLayout>
