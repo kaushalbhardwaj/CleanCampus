@@ -3,6 +3,7 @@ package com.cleancampus.fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cleancampus.R;
+import com.cleancampus.activity.ComplaintDetail;
 import com.cleancampus.activity.SharedPreference;
 import com.cleancampus.activity.UserInfo;
 import com.cleancampus.adapter.ComplaintAdapter;

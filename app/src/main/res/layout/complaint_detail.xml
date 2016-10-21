@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/grey13"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        app:theme="@style/MyMaterialTheme.AppBarOverlay"
+        android:id = "@+id/toolbar"></android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+    android:layout_below="@id/toolbar"
+    android:layout_width="match_parent"
+    android:id="@+id/layout1"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/img1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/userimage" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:text="UserName"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#424242"
+            android:textSize="22dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/complaint_username"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:text="Title"
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="2dp"
+            android:textColor="#424242"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            android:textSize="19dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/complaint_title"
+            android:layout_weight="1" />
+
+        </LinearLayout>
+    </LinearLayout>
+        <TextView
+            android:text="Supplemental actions can vary from card to card in a collection, depending on the content type and expected outcome;"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#424242"
+            android:textSize="17dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/complaint_description"
+            />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/layout1"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="2dp"
+            android:background="@color/white"
+            app:cardCornerRadius="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/mapfragment"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            ></fragment>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</LinearLayout>
