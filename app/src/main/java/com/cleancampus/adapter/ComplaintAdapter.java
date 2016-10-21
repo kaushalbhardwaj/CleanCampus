@@ -2,6 +2,7 @@ package com.cleancampus.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,17 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cleancampus.R;
+import com.cleancampus.activity.ComplaintDetail;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static com.cleancampus.R.id.imageView;
 
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Data> list = new ArrayList<>();
+     private int pos =0;
     public ComplaintAdapter(Context context1, ArrayList<Data> list1)
     {
         context = context1;
@@ -43,9 +44,8 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final int pos=position;
-
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        pos = position;
         Log.e(list.get(position).getUsername(),"p:"+position);
         holder.username.setText(list.get(position).getUsername());
         holder.description.setText(list.get(position).getDescription());
@@ -112,7 +112,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             public void onClick(View view) {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(pos).getDescription());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, list.get(position).getDescription());
                 //shareIntent.putExtra(Intent.EXTRA_STREAM, context.uriToImage);
                 shareIntent.setType("image/jpeg");
                 context.startActivity(Intent.createChooser(shareIntent, "Share ComplaintFragment With"));
@@ -124,6 +124,19 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
             @Override
             public void onClick(View view) {
 
+            }
+        });
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent complaintIntent = new Intent(context, ComplaintDetail.class);
+                String title = list.get(position).getTitle();
+                String des= list.get(position).getDescription();
+                String name = list.get(position).getUsername();
+                complaintIntent.putExtra("title",title);
+                complaintIntent.putExtra("description",des);
+                complaintIntent.putExtra("name",name);
+                context.startActivity(complaintIntent);
             }
         });
 
@@ -146,10 +159,13 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         private ImageView bookmark;
         private ImageView share;
         private ImageView status;
+        private CardView card;
 
         ViewHolder(View view)
         {
             super(view);
+
+            card=(CardView)view.findViewById(R.id.card);
             username =(TextView)view.findViewById(R.id.username);
             description =(TextView)view.findViewById(R.id.description);
             title =(TextView)view.findViewById(R.id.title);

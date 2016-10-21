@@ -16,7 +16,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public class SplashActivity extends AppCompatActivity {
 
     private Thread splash;
-    private int sleepTime=1500;
+    private int sleepTime=2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
