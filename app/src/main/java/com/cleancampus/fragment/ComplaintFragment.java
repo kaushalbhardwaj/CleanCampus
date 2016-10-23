@@ -5,10 +5,14 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cleancampus.Manifest;
 import com.cleancampus.R;
 import com.cleancampus.activity.LoginActivity;
 import com.cleancampus.activity.RegisterActivity;
@@ -36,6 +41,10 @@ import com.cleancampus.response.RegisterResponse;
 import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.w3c.dom.Text;
 
@@ -48,7 +57,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ComplaintFragment extends Fragment {
+public class ComplaintFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -59,6 +68,10 @@ public class ComplaintFragment extends Fragment {
     private TextView description;
     CoordinatorLayout cd;
     ProgressDialog pd;
+    protected GoogleApiClient mGoogleApiClient;
+    protected Location mLastLocation;
+    LatLng latLng;
+    protected static final String TAG = "Complaint";
 
 
     @Override
@@ -156,6 +169,13 @@ public class ComplaintFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int id) {
 
                     }
+                }).setNeutralButton("Location", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        buildGoogleApiClient();
+
+                        //Toast.makeText(getActivity().getApplicationContext(),mLastLocation.getLatitude()+" "+mLastLocation.getLongitude(),Toast.LENGTH_LONG).show();
+                    }
                 });
 
 
@@ -165,6 +185,67 @@ public class ComplaintFragment extends Fragment {
         });
 
         return complaintView;
+    }
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        // Provides a simple way of getting a device's location and is well suited for
+        // applications that do not require a fine-grained location and that do not need location
+        // updates. Gets the best and most recent location currently available, which may be null
+        // in rare cases when a location is not available.
+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions( new String[]{
+                android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION
+            },10);
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            //Toast.makeText(getActivity().getApplicationContext(),mLastLocation.getLatitude()+" "+ mLastLocation.getLongitude(),Toast.LENGTH_LONG).show();
+            Log.v("Coordinates",mLastLocation.getLatitude()+" "+mLastLocation.getLongitude());
+        } else {
+            //Toast.makeText(getActivity().getApplicationContext(),"Nothing detected", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+    @Override
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
     }
 
 }

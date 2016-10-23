@@ -1,7 +1,6 @@
 <resources>
 
 
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -35,6 +34,7 @@
         <item name="colorAccent">@color/md_teal_50</item>
         <item name="elevation">0dp</item>
     </style>
+
     <style name="AppTheme.fullscreen" parent="Theme.AppCompat.Light.NoActionBar"></style>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
