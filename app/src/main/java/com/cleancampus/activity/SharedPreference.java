@@ -18,6 +18,7 @@ public class SharedPreference {
 
         editor.putString("nameKey", u.getUserName());
         editor.putString("emailKey", u.getEmailId());
+        editor.putString("phoneKey",u.getPhoneNum());
         editor.commit();
         return true;
 
@@ -29,6 +30,7 @@ public class SharedPreference {
         sharedpreferences = con.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         user1.setUserName(sharedpreferences.getString("nameKey",null));
         user1.setEmailId(sharedpreferences.getString("emailKey", null));
+        user1.setPhoneNum(sharedpreferences.getString("phoneKey", null));
         return user1;
     }
 }

@@ -51,8 +51,8 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
     protected static final String TAG = "MainActivity";
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
-    //private String latitude;
-   // private String longitude;
+    private String latitude;
+    private String longitude;
     //LocationRequest mLocationRequest;
     //LatLng latLng;
     //GoogleMap mGoogleMap;
@@ -61,6 +61,14 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            title = bundle.getString("title");
+            description = bundle.getString("description");
+            name = bundle.getString("name");
+            latitude = bundle.getString("latitude");
+            longitude = bundle.getString("longitude");
+        }
         setContentView(R.layout.complaint_detail);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Complaint");
@@ -68,12 +76,7 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapfragment);
         mapFragment.getMapAsync(this);
-        bundle = getIntent().getExtras();
-        if (bundle != null) {
-            title = bundle.getString("title");
-            description = bundle.getString("description");
-            name = bundle.getString("name");
-        }
+
 
         title1 = (TextView) findViewById(R.id.complaint_title);
         desc = (TextView) findViewById(R.id.complaint_description);
@@ -165,8 +168,9 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
        // mGoogleMap.setMyLocationEnabled(true);
         //buildGoogleApiClient();
         //mGoogleApiClient.connect();
-        LatLng marker = new LatLng(-33.867,151.206);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 13));
+        //LatLng marker = new LatLng(-33.867,151.206);
+        LatLng marker = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 17));
         googleMap.addMarker(new MarkerOptions().title("Location:").position(marker));
     }
 

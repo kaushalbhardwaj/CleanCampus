@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.cleancampus.R;
 import com.cleancampus.activity.ComplaintDetail;
+import com.cleancampus.model.Complaint;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +22,9 @@ import java.util.Collections;
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Data> list = new ArrayList<>();
+    private ArrayList<Complaint> list = new ArrayList<>();
      private int pos =0;
-    public ComplaintAdapter(Context context1, ArrayList<Data> list1)
+    public ComplaintAdapter(Context context1, ArrayList<Complaint> list1)
     {
         context = context1;
         list = list1;
@@ -46,10 +47,27 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         pos = position;
-        Log.e(list.get(position).getUsername(),"p:"+position);
-        holder.username.setText(list.get(position).getUsername());
+        String a[]=list.get(position).getEmail().split("@");
+        //Log.e(list.get(position).getUsername(),"p:"+position);
+        holder.username.setText(a[0]);
         holder.description.setText(list.get(position).getDescription());
         holder.title.setText(list.get(position).getTitle());
+        String stat=list.get(position).getStatus();
+        if(stat.equals("2"))
+        {
+            holder.status.setImageResource(R.drawable.ic_query_builder_black_24px);
+
+        }
+        else if(stat.equals("0"))
+        {
+            holder.status.setImageResource(R.drawable.ic_cached_black_24px);
+
+        }
+        else
+        {
+            holder.status.setImageResource(R.drawable.ic_check_circle_black_24px);
+
+        }
         int c=position%4;
         switch (c)
         {
@@ -132,10 +150,13 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 Intent complaintIntent = new Intent(context, ComplaintDetail.class);
                 String title = list.get(position).getTitle();
                 String des= list.get(position).getDescription();
-                String name = list.get(position).getUsername();
+                String a[]=list.get(position).getEmail().split("@");
+                String name = a[0];
                 complaintIntent.putExtra("title",title);
                 complaintIntent.putExtra("description",des);
                 complaintIntent.putExtra("name",name);
+                complaintIntent.putExtra("latitude",list.get(position).getLatitude());
+                complaintIntent.putExtra("longitude",list.get(position).getLongitude());
                 context.startActivity(complaintIntent);
             }
         });
@@ -143,7 +164,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
 
     }
-    public void notifyData(ArrayList<Data> myList) {
+    public void notifyData(ArrayList<Complaint> myList) {
         Log.d("notifyData ", myList.size() + "");
         this.list = myList;
         notifyDataSetChanged();

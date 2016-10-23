@@ -8,16 +8,24 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.cleancampus.R;
 import com.cleancampus.adapter.MainAdapter;
 import com.cleancampus.fragment.ComplaintFragment;
 import com.cleancampus.fragment.Feed;
 import com.cleancampus.fragment.TipsFragment;
-import com.cleancampus.fragment.Profile;
+import com.cleancampus.fragment.ProfileFragment;
+import com.cleancampus.request.ProfileRequest;
+import com.cleancampus.response.ProfileResponse;
+import com.cleancampus.rest.ApiClient;
+import com.cleancampus.rest.ApiInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -43,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter.addFragment(new ComplaintFragment(),"");
         mainAdapter.addFragment(new Feed(),"");
         mainAdapter.addFragment(new TipsFragment(), "");
-        mainAdapter.addFragment(new Profile(),"");
+        mainAdapter.addFragment(new ProfileFragment(),"");
 
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(mainAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -72,4 +81,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
-    tools:context=".fragment.Profile"
+    tools:context=".fragment.ProfileFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -67,8 +67,8 @@
         android:textSize="15dp"
         android:id="@+id/signoutt"
         android:layout_alignBottom="@+id/logout"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignLeft="@+id/phonen"
+        android:layout_alignStart="@+id/phonen" />
 
     <TextView
         android:text="kaushalbhardwaj12@gmail.com"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="15dp"
-        android:id="@+id/textView3"
+        android:id="@+id/phonen"
         android:layout_above="@+id/logout"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />

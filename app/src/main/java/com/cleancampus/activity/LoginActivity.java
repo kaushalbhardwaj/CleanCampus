@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                             String a[]=email.getText().toString().split("@");
                             u.setEmailId(email.getText().toString());
                             u.setUserName(a[0]);
+                            u.setPhoneNum("+91-9760492235");
                             SharedPreference.putSharedPreferInfo(getApplicationContext(),u);
                             Intent loginIntent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(loginIntent);

@@ -7,6 +7,7 @@ package com.cleancampus.activity;
 public class UserInfo {
     String userName;
     String emailId;
+    String phoneNum;
 
     public String getUserName() {
         return userName;
@@ -22,5 +23,13 @@ public class UserInfo {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }
