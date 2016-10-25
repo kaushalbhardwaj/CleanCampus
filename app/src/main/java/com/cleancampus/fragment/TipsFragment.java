@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cleancampus.R;
+import com.cleancampus.adapter.TipsPagerAdapter;
 import com.cleancampus.model.Complaint;
 import com.cleancampus.response.ComplaintResponse;
 import com.cleancampus.model.LoginBody;
@@ -31,7 +32,7 @@ public class TipsFragment extends Fragment {
 
 
     ViewPager vp;
-    CircleIndicator circleIndicator;
+    TipsPagerAdapter adapter;
 
     public TipsFragment() {
         // Required empty public constructor
@@ -43,8 +44,13 @@ public class TipsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_tips, container, false);
         vp=(ViewPager)v.findViewById(R.id.pager_tips);
-        CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator);
+       CircleIndicator circleIndicator = (CircleIndicator) v.findViewById(R.id.indicator);
+        adapter = new TipsPagerAdapter(getActivity().getApplicationContext());
+        vp.setAdapter(adapter);
+        circleIndicator.setViewPager(vp);
         return v;
+
     }
 
-}
+    }
+
