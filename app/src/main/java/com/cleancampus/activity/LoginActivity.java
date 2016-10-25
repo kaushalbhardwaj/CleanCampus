@@ -6,18 +6,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleancampus.R;
 import com.cleancampus.response.LoginResponse;
 import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog pd;
     @BindView(R.id.c_layout)
     CoordinatorLayout clayout;
+    @BindView(R.id.input_username)
+    TextInputLayout inputLayoutName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +56,11 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (email.getText().toString().isEmpty() || !isValidEmail(email.getText().toString())) {
+                    inputLayoutName.setError("Wrong email");
+                    requestFocus(email);
+                    return;
+                }
                 pd = Tools.getProgressDialog(LoginActivity.this);
                 pd.show();
                 ApiInterface apiService =
@@ -108,5 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
+    }
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }

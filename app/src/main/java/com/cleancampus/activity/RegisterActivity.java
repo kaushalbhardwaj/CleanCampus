@@ -7,9 +7,12 @@ import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +24,8 @@ import com.cleancampus.response.RegisterResponse;
 import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +46,14 @@ public class RegisterActivity extends AppCompatActivity{
     EditText phone;
     @BindView(R.id.c_layout)
     CoordinatorLayout clayout;
+    @BindView(R.id.input_name)
+    TextInputLayout inputName;
+    @BindView(R.id.input_username)
+    TextInputLayout inputEmail;
+    @BindView(R.id.input_password)
+    TextInputLayout inputPassword;
+    @BindView(R.id.input_phone)
+    TextInputLayout inputPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +67,16 @@ public class RegisterActivity extends AppCompatActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(!isValidInput())
+                {
+
+
+                    return;
+
+                }
+
+
                 User user=new User();
                 user.setPassword(password.getText().toString());
                 user.setConfirmPassword(password.getText().toString());
@@ -114,5 +137,68 @@ public class RegisterActivity extends AppCompatActivity{
 
             }
         });
+
     }
+
+    private boolean isValidInput() {
+        if(name.getText().toString().isEmpty())
+        {
+            inputName.setError("Empty field");
+            requestFocus(name);
+            return false;
+
+        }
+        else {
+            inputName.setErrorEnabled(false);
+        }
+
+        if (email.getText().toString().isEmpty() || !isValidEmail(email.getText().toString())) {
+            inputEmail.setError("Wrong email");
+            requestFocus(email);
+            return false;
+        }
+        else {
+            inputEmail.setErrorEnabled(false);
+        }
+        if(password.getText().toString().isEmpty())
+        {
+            inputPassword.setError("Empty field");
+            requestFocus(password);
+            return false;
+
+        }
+        else {
+            inputPassword.setErrorEnabled(false);
+        }
+        if(phone.getText().toString().isEmpty()||!isValidMobile(phone.getText().toString()))
+        {
+            inputPhone.setError("Wrong phone number");
+            requestFocus(phone);
+            return false;
+
+        }
+
+        else {
+            inputPassword.setErrorEnabled(false);
+        }
+
+
+         return true;
+    }
+
+    boolean isValidMobile(String phone)
+    {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
+
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
+
 }
