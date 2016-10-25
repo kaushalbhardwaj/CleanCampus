@@ -12,12 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cleancampus.R;
 import com.cleancampus.response.LoginResponse;
 import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,10 +48,16 @@ public class LoginActivity extends AppCompatActivity {
         registerText =(TextView) findViewById(R.id.register_text);
         email =(EditText) findViewById(R.id.username);
         password =(EditText) findViewById(R.id.password);
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(!isValidEmaillId(email.getText().toString().trim())) {
+                    Snackbar snackbar = Snackbar
+                            .make(clayout, "InValid Username", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    return;
+                }
                 pd = Tools.getProgressDialog(LoginActivity.this);
                 pd.show();
                 ApiInterface apiService =
@@ -108,5 +117,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
+    }
+    private boolean isValidEmaillId(String email){
+
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
 }

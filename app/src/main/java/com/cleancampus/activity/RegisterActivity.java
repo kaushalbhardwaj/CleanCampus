@@ -22,6 +22,8 @@ import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
 
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -54,6 +56,31 @@ public class RegisterActivity extends AppCompatActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (name.length() == 0 || email.length() ==
+                        0 || phone.length() == 0 || password.length() == 0) {
+
+                    Snackbar snackbar = Snackbar
+                            .make(clayout, "Please Fill the Fields", Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    return;
+
+                }
+                else if(!isValidEmaillId(email.getText().toString().trim())) {
+                    Snackbar snackbar = Snackbar
+                            .make(clayout, "InValid Username", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    return;
+                }
+                else if(!isValidMobile(phone.getText().toString().trim()))
+                {
+                    Snackbar snackbar = Snackbar
+                            .make(clayout, "InValid Phone Number", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    return;
+                }
+
+
                 User user=new User();
                 user.setPassword(password.getText().toString());
                 user.setConfirmPassword(password.getText().toString());
@@ -114,5 +141,21 @@ public class RegisterActivity extends AppCompatActivity{
 
             }
         });
+
     }
+     boolean isValidMobile(String phone)
+    {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
+    private boolean isValidEmaillId(String email){
+
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
+
+
 }
