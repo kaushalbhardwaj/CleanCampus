@@ -46,6 +46,9 @@ public class TipsFragment extends Fragment {
         vp=(ViewPager)v.findViewById(R.id.pager_tips);
        CircleIndicator circleIndicator = (CircleIndicator) v.findViewById(R.id.indicator);
         adapter = new TipsPagerAdapter(getActivity().getApplicationContext());
+        vp.setClipToPadding(false);
+        vp.setPageMargin(35);
+        vp.setOffscreenPageLimit(4);
         vp.setAdapter(adapter);
         circleIndicator.setViewPager(vp);
         return v;
