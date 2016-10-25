@@ -36,6 +36,7 @@ import com.cleancampus.adapter.ComplaintAdapter;
 import com.cleancampus.adapter.Data;
 import com.cleancampus.adapter.Dbhelper;
 import com.cleancampus.model.Complaint;
+import com.cleancampus.response.ComplaintFeedResponse;
 import com.cleancampus.response.ComplaintResponse;
 import com.cleancampus.response.RegisterResponse;
 import com.cleancampus.rest.ApiClient;
@@ -49,6 +50,7 @@ import com.google.android.gms.maps.model.LatLng;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,16 +64,20 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<Data> list = new ArrayList<>();
+    private ArrayList<Complaint> list = new ArrayList<>();
     private FloatingActionButton fab;
     private TextView title;
     private TextView description;
     CoordinatorLayout cd;
     ProgressDialog pd;
+    UserInfo u;
+    Complaint complaint1;
     protected GoogleApiClient mGoogleApiClient;
     protected Location mLastLocation;
     LatLng latLng;
     protected static final String TAG = "Complaint";
+    Dbhelper dbhelper;
+
 
 
     @Override
@@ -79,9 +85,11 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
                              Bundle savedInstanceState) {
         final View complaintView = inflater.inflate(R.layout.fragment_complaint, container, false);
 
-        final Dbhelper dbhelper = new Dbhelper(getActivity().getApplicationContext());
 
-        list = dbhelper.getData();
+        /*dbhelper = new Dbhelper(getActivity().getApplicationContext());
+
+        list = dbhelper.getData();*/
+        Log.e("complain","  ");
 
         recyclerView = (RecyclerView) complaintView.findViewById(R.id.recyler_complaint);
         title = (TextView) complaintView.findViewById(R.id.complaint);
@@ -89,12 +97,12 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
         cd=(CoordinatorLayout) getActivity().findViewById(R.id.c_layout);
 
 
-        adapter = new ComplaintAdapter(getContext(), list);
-        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        getComplaints();
 
-        final UserInfo u= SharedPreference.getSharedPreferInfo(getActivity().getApplicationContext());
+
+
+
+        u= SharedPreference.getSharedPreferInfo(getActivity().getApplicationContext());
         fab = (FloatingActionButton) complaintView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,72 +117,24 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
                         EditText complaint = (EditText) f.findViewById(R.id.complaint);
                         EditText description = (EditText) f.findViewById(R.id.description);
 
-                        Complaint complaint1=new Complaint();
+                        complaint1=new Complaint();
                         UserInfo ui=SharedPreference.getSharedPreferInfo(getActivity().getApplicationContext());
-                        complaint1.setEmail(ui.getUserName());
+                        complaint1.setEmail(ui.getEmailId());
                         complaint1.setDescription(description.getText().toString());
                         complaint1.setTitle(complaint.getText().toString());
-                        final Complaint com=complaint1;
+                        complaint1.setLatitude("  ");
+                        complaint1.setLongitude("  ");
+                        complaint1.setStatus("2");
                         dialog.dismiss();
                         pd = Tools.getProgressDialog(getActivity());
                         pd.show();
-                        ApiInterface apiService =
-                                ApiClient.getClient().create(ApiInterface.class);
-                        Call<ComplaintResponse> call = apiService.sendComplaint(complaint1);
-                        call.enqueue(new Callback<ComplaintResponse>() {
-                            @Override
-                            public void onResponse(Call<ComplaintResponse>call, Response<ComplaintResponse> response) {
-                                pd.dismiss();
-                                Log.e("complain",response.code()+" "+response.isSuccessful()+response.body().getMessage());
-                                if(response.isSuccessful())
-                                {
-
-                                    Snackbar snackbar = Snackbar
-                                            .make(cd, "Complain Added Successfully!!!", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
-                                    Data data = new Data(u.getUserName(), "", u.getEmailId(), com.getTitle(), com.getDescription(), 0, "");
-                                    dbhelper.add(data);
-                                    list.add(0, data);
-                                    adapter.notifyItemInserted(0);
-                                    recyclerView.scrollToPosition(0);
-
-                                }
-                                else
-                                {
-                                    Snackbar snackbar = Snackbar
-                                            .make(cd, "Error Try Again Later!!!", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
-                                    Log.e("complain",response.toString());
-
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<ComplaintResponse>call, Throwable t) {
-                                Log.e("complain", t.toString());
-                                pd.dismiss();
-                                Snackbar snackbar = Snackbar
-                                        .make(cd, "Can't connect to Internet!!", Snackbar.LENGTH_LONG);
-
-                                snackbar.show();
-                            }
-                        });
+                        buildGoogleApiClient();
 
                     }
                 }).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
 
-                    }
-                }).setNeutralButton("Location", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        buildGoogleApiClient();
-
-                        //Toast.makeText(getActivity().getApplicationContext(),mLastLocation.getLatitude()+" "+mLastLocation.getLongitude(),Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -186,6 +146,86 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
 
         return complaintView;
     }
+
+    private void getComplaints() {
+
+        pd = Tools.getProgressDialog(getActivity());
+        pd.show();
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        Call<ComplaintFeedResponse> call = apiService.getComplaints();
+        call.enqueue(new Callback<ComplaintFeedResponse>() {
+            @Override
+            public void onResponse(Call<ComplaintFeedResponse>call, Response<ComplaintFeedResponse> response) {
+                pd.dismiss();
+                Log.e("complain",response.code()+" "+response.isSuccessful()+response.body().getComplaints().size()+"");
+                if(response.isSuccessful())
+                {
+                    Snackbar snackbar = Snackbar
+                            .make(cd, "Complaints Fetched Successfully!!!", Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    list=(ArrayList<Complaint>) response.body().getComplaints();
+                    setUpView();
+                }
+                else
+                {
+                    Snackbar snackbar = Snackbar
+                            .make(cd, "Error Try Again Later!!!", Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    Log.e("complain",response.toString());
+                    list=null;
+                    setUpView();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ComplaintFeedResponse>call, Throwable t) {
+                Log.e("complain", t.toString());
+                pd.dismiss();
+                Snackbar snackbar = Snackbar
+                        .make(cd, "Can't connect to Internet!!", Snackbar.LENGTH_LONG);
+
+                snackbar.show();
+                list=null;
+                setUpView();
+
+            }
+        });
+
+
+    }
+
+    private void setUpView() {
+
+        if(list!=null)
+        {
+            adapter = new ComplaintAdapter(getContext(), list);
+            linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(linearLayoutManager);
+
+
+
+        }
+        else
+        {
+
+            /*dbhelper = new Dbhelper(getActivity().getApplicationContext());
+
+            list = dbhelper.getData();*/
+
+
+
+        }
+
+
+    }
+
+
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
                 .addConnectionCallbacks(this)
@@ -196,13 +236,7 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
     }
 
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
+
 
     @Override
     public void onConnected(Bundle connectionHint) {
@@ -228,9 +262,71 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             //Toast.makeText(getActivity().getApplicationContext(),mLastLocation.getLatitude()+" "+ mLastLocation.getLongitude(),Toast.LENGTH_LONG).show();
             Log.v("Coordinates",mLastLocation.getLatitude()+" "+mLastLocation.getLongitude());
+            complaint1.setLatitude(mLastLocation.getLatitude()+"");
+            complaint1.setLongitude(mLastLocation.getLongitude()+"");
+            sendToServer();
         } else {
+            Snackbar snackbar = Snackbar
+                    .make(cd, "Error Could not fetch location!!!", Snackbar.LENGTH_LONG);
+
+            snackbar.show();
             //Toast.makeText(getActivity().getApplicationContext(),"Nothing detected", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void sendToServer() {
+
+        final Complaint com=complaint1;
+        dbhelper = new Dbhelper(getActivity().getApplicationContext());
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+        Call<ComplaintResponse> call = apiService.sendComplaint(complaint1);
+        call.enqueue(new Callback<ComplaintResponse>() {
+            @Override
+            public void onResponse(Call<ComplaintResponse>call, Response<ComplaintResponse> response) {
+                pd.dismiss();
+                Log.e("complain",response.code()+" "+response.isSuccessful()+response.body().getMessage());
+                if(response.isSuccessful())
+                {
+
+                    Snackbar snackbar = Snackbar
+                            .make(cd, "Complain Added Successfully!!!", Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    /*Data data = new Data(u.getUserName(), "", u.getEmailId(), com.getTitle(), com.getDescription(), 0, "");
+                    dbhelper.add(data);
+                    */
+
+                    list.add(0, complaint1);
+                    adapter.notifyItemInserted(0);
+                    recyclerView.scrollToPosition(0);
+
+                }
+                else
+                {
+                    Snackbar snackbar = Snackbar
+                            .make(cd, "Error Try Again Later!!!", Snackbar.LENGTH_LONG);
+
+                    snackbar.show();
+                    Log.e("complain",response.toString());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ComplaintResponse>call, Throwable t) {
+                Log.e("complain", t.toString());
+                pd.dismiss();
+                Snackbar snackbar = Snackbar
+                        .make(cd, "Can't connect to Internet!!", Snackbar.LENGTH_LONG);
+
+                snackbar.show();
+            }
+        });
+
+
+
     }
 
 
