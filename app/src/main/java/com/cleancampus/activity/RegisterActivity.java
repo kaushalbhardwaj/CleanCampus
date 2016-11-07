@@ -7,9 +7,12 @@ import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -43,6 +46,14 @@ public class RegisterActivity extends AppCompatActivity{
     EditText phone;
     @BindView(R.id.c_layout)
     CoordinatorLayout clayout;
+    @BindView(R.id.input_name)
+    TextInputLayout inputName;
+    @BindView(R.id.input_username)
+    TextInputLayout inputEmail;
+    @BindView(R.id.input_password)
+    TextInputLayout inputPassword;
+    @BindView(R.id.input_phone)
+    TextInputLayout inputPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,28 +67,13 @@ public class RegisterActivity extends AppCompatActivity{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (name.length() == 0 || email.length() ==
-                        0 || phone.length() == 0 || password.length() == 0) {
 
-                    Snackbar snackbar = Snackbar
-                            .make(clayout, "Please Fill the Fields", Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                    return;
-
-                }
-                else if(!isValidEmaillId(email.getText().toString().trim())) {
-                    Snackbar snackbar = Snackbar
-                            .make(clayout, "InValid Username", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                    return;
-                }
-                else if(!isValidMobile(phone.getText().toString().trim()))
+                if(!isValidInput())
                 {
-                    Snackbar snackbar = Snackbar
-                            .make(clayout, "InValid Phone Number", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+
+
                     return;
+
                 }
 
 
@@ -143,18 +139,65 @@ public class RegisterActivity extends AppCompatActivity{
         });
 
     }
-     boolean isValidMobile(String phone)
+
+    private boolean isValidInput() {
+        if(name.getText().toString().isEmpty())
+        {
+            inputName.setError("Empty field");
+            requestFocus(name);
+            return false;
+
+        }
+        else {
+            inputName.setErrorEnabled(false);
+        }
+
+        if (email.getText().toString().isEmpty() || !isValidEmail(email.getText().toString())) {
+            inputEmail.setError("Wrong email");
+            requestFocus(email);
+            return false;
+        }
+        else {
+            inputEmail.setErrorEnabled(false);
+        }
+        if(password.getText().toString().isEmpty())
+        {
+            inputPassword.setError("Empty field");
+            requestFocus(password);
+            return false;
+
+        }
+        else {
+            inputPassword.setErrorEnabled(false);
+        }
+        if(phone.getText().toString().isEmpty()||!isValidMobile(phone.getText().toString()))
+        {
+            inputPhone.setError("Wrong phone number");
+            requestFocus(phone);
+            return false;
+
+        }
+
+        else {
+            inputPassword.setErrorEnabled(false);
+        }
+
+
+         return true;
+    }
+
+    boolean isValidMobile(String phone)
     {
         return android.util.Patterns.PHONE.matcher(phone).matches();
     }
-    private boolean isValidEmaillId(String email){
 
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
 

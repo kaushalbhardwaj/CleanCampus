@@ -97,8 +97,8 @@
                 android:id="@+id/phone"
                 android:textColor="@color/white"
                 android:textColorHint="@color/lcolor"
-                android:inputType="phone"
                 android:layout_width="match_parent"
+                android:inputType="phone"
                 android:layout_height="wrap_content"
                 android:hint="Phone No." />
 

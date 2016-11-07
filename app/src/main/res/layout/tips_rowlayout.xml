@@ -5,16 +5,32 @@
     android:background="#FFFFFF">
 <ImageView
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:id="@+id/tips_image"
-    android:background="@drawable/spalsh"/>
+    android:layout_height="170dp"
+    android:id="@+id/tips_image"/>
 
     <TextView
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:text = "Heading"
+        android:id="@+id/tips_head"/>
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="#424242"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="12dp"
         android:gravity="center"
-        android:text = "Cleanliness may be defined to be the emblem of purity of mind. -Joseph Addison"
+        android:text = "Cleanliness may be defined to be the\n emblem of purity of mind. -Joseph Addison"
         android:id="@+id/tips_text"/>
 </LinearLayout>

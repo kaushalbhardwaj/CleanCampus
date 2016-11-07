@@ -11,8 +11,11 @@
         android:id="@+id/pager_tips"
         android:layout_width="match_parent"
         android:layout_weight="8"
+        android:paddingLeft="45dp"
+        android:gravity="center"
+        android:paddingRight="8dp"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp" >
+        android:layout_marginTop="40dp" >
 
     </android.support.v4.view.ViewPager>
 
@@ -20,9 +23,9 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:layout_weight="2">
+        android:layout_weight="1">
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"

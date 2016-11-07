@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog pd;
     @BindView(R.id.c_layout)
     CoordinatorLayout clayout;
+    @BindView(R.id.input_username)
+    TextInputLayout inputLayoutName;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +53,12 @@ public class LoginActivity extends AppCompatActivity {
         registerText =(TextView) findViewById(R.id.register_text);
         email =(EditText) findViewById(R.id.username);
         password =(EditText) findViewById(R.id.password);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isValidEmaillId(email.getText().toString().trim())) {
-                    Snackbar snackbar = Snackbar
-                            .make(clayout, "InValid Username", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                if (email.getText().toString().isEmpty() || !isValidEmail(email.getText().toString())) {
+                    inputLayoutName.setError("Wrong email");
+                    requestFocus(email);
                     return;
                 }
                 pd = Tools.getProgressDialog(LoginActivity.this);
@@ -118,13 +121,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private boolean isValidEmaillId(String email){
-
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 }
