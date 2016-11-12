@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".fragment.Feed">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyler_feed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Feed"
-        android:gravity="center"
-        android:textSize="20dp"/>
-
+        ></android.support.v7.widget.RecyclerView>
 </FrameLayout>

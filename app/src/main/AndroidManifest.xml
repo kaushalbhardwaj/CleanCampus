@@ -60,6 +60,13 @@
                 android:value=".activity.MainActivity" />
         </activity>
 
+        <activity android:name=".activity.MapActivity" >
+            <intent-filter>
+                <action android:name="com.cleancampus.activity.map" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCCHaoYnE4m4YuFN7iy39anQoDTtBxEfkw" />
@@ -67,10 +74,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <service
-            android:name=".service.GPSService"
-            android:enabled="true"
-            android:exported="true"></service>
+
     </application>
 
 </manifest>

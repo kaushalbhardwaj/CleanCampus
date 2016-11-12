@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.cleancampus.R;
 import com.cleancampus.activity.LoginActivity;
 import com.cleancampus.activity.MainActivity;
+import com.cleancampus.activity.MapActivity;
 import com.cleancampus.activity.SharedPreference;
 import com.cleancampus.activity.UserInfo;
 import com.cleancampus.adapter.Data;
@@ -91,9 +92,11 @@ public class ProfileFragment extends Fragment {
         fabDust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog=new Dialog(getActivity(),android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                /*Dialog dialog=new Dialog(getActivity(),android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                 dialog.setContentView(R.layout.layout_dustbin_map);
-                dialog.show();
+                dialog.show();*/
+                Intent mapIntent = new Intent(getActivity().getApplicationContext(), MapActivity.class);
+                startActivity(mapIntent);
             }
         });
 
