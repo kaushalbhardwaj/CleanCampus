@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.cleancampus.Manifest;
 import com.cleancampus.R;
+import com.cleancampus.activity.AddComplaint;
 import com.cleancampus.activity.LoginActivity;
 import com.cleancampus.activity.RegisterActivity;
 import com.cleancampus.activity.SharedPreference;
@@ -107,8 +108,9 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                Intent complaintIntent = new Intent(getActivity().getApplicationContext(), AddComplaint.class);
+                startActivity(complaintIntent);
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 final LayoutInflater inflater = getActivity().getLayoutInflater();
                 builder.setView(inflater.inflate(R.layout.dialog, null)).setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
@@ -140,7 +142,7 @@ public class ComplaintFragment extends Fragment implements GoogleApiClient.Conne
 
 
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
             }
         });
 

@@ -60,6 +60,17 @@
                 android:value=".activity.MainActivity" />
         </activity>
 
+        <activity android:name=".activity.AddComplaint">
+            <intent-filter>
+                <action android:name="com.cleancampus.activity.addcomplaint" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity android:name=".activity.MapActivity" >
             <intent-filter>
                 <action android:name="com.cleancampus.activity.map" />
