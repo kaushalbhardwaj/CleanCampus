@@ -2,41 +2,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey13"
+    android:background="@color/grey12"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/complaint_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"></android.support.v7.widget.Toolbar>
+        android:background="@color/colorPrimary"
+        app:theme="@style/MyMaterialTheme.AppBarOverlay"></android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/complaintimage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:visibility="invisible" />
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="@color/grey11"
+            app:cardCornerRadius="3dp"
+            app:cardMaxElevation="4dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/complaintimage"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ic_photo_camera_white_48px"
+                android:visibility="visible" />
+        </android.support.v7.widget.CardView>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_complaint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp">
 
             <EditText
                 android:id="@+id/complaint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Complaint Title"
+                android:inputType="textAutoCorrect"
                 android:textColor="#424242" />
 
         </android.support.design.widget.TextInputLayout>
@@ -46,8 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
 
             >
@@ -57,66 +70,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Description"
+                android:inputType="textAutoCorrect"
                 android:textColor="#424242" />
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/grey16"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:orientation="horizontal">
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
 
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    app:srcCompat="@drawable/ic_placeholder" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Fetching Your Location...."
-                    android:textColor="@color/colorAccent"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/takepic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Take pic" />
-
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/submit"
-                android:layout_alignParentRight="true"
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit" />
-        </RelativeLayout>
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="15dp"
+                app:srcCompat="@drawable/ic_placeholder" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="8dp"
+                android:text="Fetching Your Location...."
+                android:textColor="@color/colorAccent"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#78909C"
+            android:text="Submit"
+            android:textColor="#ffffff" />
     </LinearLayout>
 </LinearLayout>

@@ -86,15 +86,15 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
         toolbar = (Toolbar) findViewById(R.id.complaint_toolbar);
         complaint = (EditText) findViewById(R.id.complaint);
         description = (EditText) findViewById(R.id.description);
-        takePic = (Button) findViewById(R.id.takepic);
         submit = (Button) findViewById(R.id.submit);
         imageGarbage=(ImageView)findViewById(R.id.complaintimage);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Add Complaint");
         toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        takePic.setOnClickListener(new View.OnClickListener() {
+
+        imageGarbage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 captureImage();
@@ -313,6 +313,7 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
             // "RECREATE" THE NEW BITMAP
             Bitmap resizedBitmap = Bitmap.createBitmap(
                     bitmap,0,0, width, height,matrix, false);
+            imageGarbage.setImageResource(0);
             imageGarbage.setImageBitmap(resizedBitmap);
         }
     }
