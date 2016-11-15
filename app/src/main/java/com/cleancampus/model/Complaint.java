@@ -19,6 +19,16 @@ public class Complaint {
     String longitude;
     @SerializedName("status")
     String status;
+    @SerializedName("image")
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getEmail() {
         return email;

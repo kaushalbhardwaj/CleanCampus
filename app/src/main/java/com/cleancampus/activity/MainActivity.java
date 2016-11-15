@@ -1,14 +1,17 @@
 package com.cleancampus.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cleancampus.R;
 import com.cleancampus.adapter.MainAdapter;
@@ -16,6 +19,7 @@ import com.cleancampus.fragment.ComplaintFragment;
 import com.cleancampus.fragment.Feed;
 import com.cleancampus.fragment.TipsFragment;
 import com.cleancampus.fragment.ProfileFragment;
+import com.cleancampus.model.Complaint;
 import com.cleancampus.request.ProfileRequest;
 import com.cleancampus.response.ProfileResponse;
 import com.cleancampus.rest.ApiClient;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     @BindView(R.id.c_layout)
     CoordinatorLayout c_layout;
+    Complaint com;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 1000) {
+                com=new Complaint();
+                com.setEmail(data.getStringExtra("email"));
+                com.setDescription(data.getStringExtra("description"));
+                com.setTitle(data.getStringExtra("title"));
+                com.setLatitude(data.getStringExtra("latitude"));
+                com.setLongitude(data.getStringExtra("longitude"));
+                com.setStatus(data.getStringExtra("status"));
+                com.setImage(data.getStringExtra("image"));
+                Log.e("data","got it");
+            int index = viewPager.getCurrentItem();
+            MainAdapter adapter = ((MainAdapter) viewPager.getAdapter());
+            Fragment fragment = adapter.getFragment(index);
+            ComplaintFragment cf=(ComplaintFragment)fragment;
+            cf.addComplaint(com);
+
+
+        }
+    }
+
 
 
 }

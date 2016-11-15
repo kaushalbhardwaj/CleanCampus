@@ -157,6 +157,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
                 complaintIntent.putExtra("name",name);
                 complaintIntent.putExtra("latitude",list.get(position).getLatitude());
                 complaintIntent.putExtra("longitude",list.get(position).getLongitude());
+                complaintIntent.putExtra("image",list.get(position).getImage());
                 context.startActivity(complaintIntent);
             }
         });

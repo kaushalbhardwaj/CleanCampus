@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
@@ -28,8 +28,8 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/complaintimage"
-                android:layout_width="220dp"
-                android:layout_height="220dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/ic_photo_camera_white_48px"
                 android:visibility="visible" />
@@ -106,12 +106,13 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/submit"
-            android:layout_width="220dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:background="#78909C"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#ee33465D"
             android:text="Submit"
-            android:textColor="#ffffff" />
+            android:textColor="@color/white" />
+
     </LinearLayout>
 </LinearLayout>

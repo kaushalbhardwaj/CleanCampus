@@ -35,6 +35,7 @@ import com.cleancampus.response.ComplaintResponse;
 import com.cleancampus.rest.ApiClient;
 import com.cleancampus.rest.ApiInterface;
 import com.cleancampus.tools.Tools;
+import com.cleancampus.tools.ipaulpro.afilechooser.utils.FileUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -45,7 +46,12 @@ import java.io.File;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +72,7 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
     LatLng latLng;
     protected static final String TAG = "Complaint";
     Dbhelper dbhelper;
+    public static String name;
     ProgressDialog pd;
     UserInfo u;
     Complaint complaint1;
@@ -74,6 +81,7 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
+    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     ImageView imageGarbage;
     private Uri fileUri;
@@ -114,7 +122,6 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
                 pd = Tools.getProgressDialog(AddComplaint.this);
                 pd.show();
                 buildGoogleApiClient();
-                sendToServer();
             }
         });
     }
@@ -179,12 +186,15 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "IMG_" + timeStamp + ".jpg");
+            name="IMG_" + timeStamp + ".jpg";
+
         } else if (type == MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "VID_" + timeStamp + ".mp4");
         } else {
             return null;
         }
+
 
         return mediaFile;
     }
@@ -222,49 +232,94 @@ public class AddComplaint extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
+    private RequestBody createPartFromString(String descriptionString) {
+        return RequestBody.create(
+                MediaType.parse(MULTIPART_FORM_DATA), descriptionString);
+    }
     private void sendToServer() {
 
+        int c=0;
         final Complaint com=complaint1;
+
+        RequestBody email1 = createPartFromString(com.getEmail());
+        RequestBody title1 = createPartFromString(com.getTitle());
+        RequestBody description1 = createPartFromString(com.getDescription());
+        RequestBody latitude1 = createPartFromString(com.getLatitude());
+        RequestBody longitude1 = createPartFromString(com.getLongitude());
+        RequestBody status1 = createPartFromString(com.getStatus());
+
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("email", email1);
+        map.put("title", title1);
+        map.put("description", description1);
+        map.put("latitude", latitude1);
+        map.put("longitude", longitude1);
+        map.put("status", status1);
+
+
+        if(fileUri!=null)
+        {
+            final File file = FileUtils.getFile(this, fileUri);
+
+
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
         dbhelper = new Dbhelper(getApplicationContext());
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-        Call<ComplaintResponse> call = apiService.sendComplaint(complaint1);
-        call.enqueue(new Callback<ComplaintResponse>() {
-            @Override
-            public void onResponse(Call<ComplaintResponse>call, Response<ComplaintResponse> response) {
-                pd.dismiss();
-                Log.e("complain",response.code()+" "+response.isSuccessful()+response.body().getMessage());
-                if(response.isSuccessful())
-                {
+            ApiInterface apiService =
+                    ApiClient.getClient().create(ApiInterface.class);
+            Call<ComplaintResponse> call = apiService.sendComplaint(map, body);
+            call.enqueue(new Callback<ComplaintResponse>() {
+                @Override
+                public void onResponse(Call<ComplaintResponse> call, Response<ComplaintResponse> response) {
+                    pd.dismiss();
+                    Log.e("complain", response.code() + " " + response.isSuccessful() + response.body().getMessage());
+                    if (response.isSuccessful()) {
 
 
-                    Toast.makeText(AddComplaint.this,"Complaint Registered Succesfully!!",Toast.LENGTH_LONG).show();
-                    Intent i=new Intent(AddComplaint.this,MainActivity.class);
-                    startActivity(i);
-                    finish();
+                        Toast.makeText(AddComplaint.this, "Complaint Registered Succesfully!!", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent();
+                        intent.putExtra("email", com.getEmail());
+                        intent.putExtra("title", com.getTitle());
+                        intent.putExtra("description", com.getDescription());
+                        intent.putExtra("latitude", com.getLatitude());
+                        intent.putExtra("longitude", com.getLongitude());
+                        intent.putExtra("status", com.getStatus());
+                        intent.putExtra("image", "http://cleancampus.herokuapp.com/api/media/images/"+name);
+                        setResult(1000, intent);
+                        finish();//finishing activity
                     /*Data data = new Data(u.getUserName(), "", u.getEmailId(), com.getTitle(), com.getDescription(), 0, "");
                     dbhelper.add(data);
                     */
 
 
-                }
-                else
-                {
-                    Toast.makeText(AddComplaint.this,"Error Try Again Later!!!",Toast.LENGTH_LONG).show();
-                    Log.e("complain",response.toString());
+                    } else {
+                        Toast.makeText(AddComplaint.this, "Error Try Again Later!!!", Toast.LENGTH_LONG).show();
+                        Log.e("complain", response.toString());
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void onFailure(Call<ComplaintResponse> call, Throwable t) {
+                    Log.e("complain", t.toString());
+                    pd.dismiss();
+                    Toast.makeText(AddComplaint.this, "Can't connect to Internet!!", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(AddComplaint.this, "Please Take a Picture!!!!", Toast.LENGTH_SHORT).show();
+            pd.dismiss();
 
-            @Override
-            public void onFailure(Call<ComplaintResponse>call, Throwable t) {
-                Log.e("complain", t.toString());
-                pd.dismiss();
-                Toast.makeText(AddComplaint.this,"Can't connect to Internet!!",Toast.LENGTH_LONG).show();
-            }
-        });
 
+        }
 
 
     }

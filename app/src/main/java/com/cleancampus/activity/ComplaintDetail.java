@@ -4,6 +4,7 @@ package com.cleancampus.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,12 @@ import android.widget.Toast;
 
 import com.cleancampus.R;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -31,6 +38,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import butterknife.BindView;
 
 /**
  * Created by chanpreet on 18/10/16.
@@ -53,6 +62,7 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
     protected Location mLastLocation;
     private String latitude;
     private String longitude;
+    private String image;
     //LocationRequest mLocationRequest;
     //LatLng latLng;
     //GoogleMap mGoogleMap;
@@ -60,6 +70,7 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Fresco.initialize(ComplaintDetail.this);
         super.onCreate(savedInstanceState);
         bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -68,6 +79,8 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
             name = bundle.getString("name");
             latitude = bundle.getString("latitude");
             longitude = bundle.getString("longitude");
+            image = bundle.getString("image");
+            Log.e("image",image);
         }
         setContentView(R.layout.complaint_detail);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,9 +94,19 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
         title1 = (TextView) findViewById(R.id.complaint_title);
         desc = (TextView) findViewById(R.id.complaint_description);
         username = (TextView) findViewById(R.id.complaint_username);
+        SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.sdvImage);
         title1.setText(title);
         desc.setText(description);
         username.setText(name);
+        Uri uri = Uri.parse(image);
+        /*
+        draweeView.setImageURI(uri);*/
+        int width = 150, height = 150;
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+        .setResizeOptions(new ResizeOptions(width, height)).build();
+        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request).setOldController(draweeView.getController()).build();
+        draweeView.setController(controller);
 
     }
 
@@ -157,7 +180,7 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
 
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
+            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
