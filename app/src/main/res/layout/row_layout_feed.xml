@@ -1,133 +1,43 @@
-<android.support.v7.widget.CardView
-    android:layout_width="match_parent"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/white"
-    app:cardElevation="2dp"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
-    android:id="@+id/card"
-    android:layout_marginBottom="8dp"
-    android:layout_gravity="center"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="3dp"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:cardElevation="4dp">
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <TextView
+            android:id="@+id/feed_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="UserName"
+            android:textColor="#424242"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/feed_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/img1"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:id="@+id/feed_userimage" />
-
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:text="UserName"
-                    android:layout_width="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="#424242"
-                    android:textSize="20dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/feed_username"
-                    android:layout_weight="1" />
-
-
-                <TextView
-                    android:text="Title"
-                    android:layout_width="match_parent"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="2dp"
-                    android:textColor="#424242"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp"
-                    android:textSize="15dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/feed_title"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <ImageView
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_margin="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/tips1"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="200dp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/grey9"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="45dp">
-
-
-                <ToggleButton
-                    android:id="@+id/like"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/like_toggle"
-                    android:textOn=""
-                    android:textOff=""
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"/>
-                <ToggleButton
-                    android:id="@+id/bookmark"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/bookmark_toggle"
-                    android:textOn=""
-                    android:textOff=""
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"/>
-                <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    app:srcCompat="@drawable/ic_share_black_24px"
-                    android:id="@+id/share"/>
-            </LinearLayout>
-        </RelativeLayout>
-
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/a"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

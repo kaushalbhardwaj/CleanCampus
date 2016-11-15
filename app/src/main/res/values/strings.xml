@@ -20,6 +20,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_complaint">ComplaintActivity</string>
+    <string-array name="text">
+        <item>Namsai division took up the task to build a model IHHL in every Panchayat in Arunachal Pradesh</item>
+        <item>On-site orientation of masons on leach pit toilet design through toilet on van model in Durg, Chhattisgarh.</item>
+        <item>Morning follow up done by vanar sena and nigrani samiti in Gram Panchayat Bhudukuda, UP</item>
+        <item>Called 4 Jan Andolan on @swachhbharat. Took part in Mission Clean Kley River org by Apatani Youth Association in Ziro. </item>
+        <item>The Swachh Bharat Swachh Sena Rangoli at GVP in Mailardevpally div.</item>
+        <item>A door-to-door visit program was conducted where awareness on zero waste was done by the SHGS, NERLP workers and VAC staff in Sikkim.</item>
+        <item>7 teams in Torpa block along with school children, teachers and villagers conducted a triggering activity and took Swachhta pledge in Jharkhand.</item>
+        <item>Since the launch of SBM, 2.5 crore toilets have been constructed and more 58 districts have been declared #ODF</item>
+    </string-array>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -109,4 +119,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
 </resources>
