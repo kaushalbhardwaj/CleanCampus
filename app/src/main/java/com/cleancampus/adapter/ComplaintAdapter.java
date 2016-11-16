@@ -144,7 +144,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
 
             }
         });
-        holder.card.setOnClickListener(new View.OnClickListener() {
+        holder.v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent complaintIntent = new Intent(context, ComplaintDetail.class);
@@ -182,11 +182,13 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.View
         private ImageView share;
         private ImageView status;
         private CardView card;
+        View v;
 
         ViewHolder(View view)
         {
             super(view);
 
+            v=view;
             card=(CardView)view.findViewById(R.id.card);
             username =(TextView)view.findViewById(R.id.username);
             description =(TextView)view.findViewById(R.id.description);

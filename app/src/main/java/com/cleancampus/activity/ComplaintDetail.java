@@ -101,7 +101,7 @@ public class ComplaintDetail extends AppCompatActivity implements OnMapReadyCall
         Uri uri = Uri.parse(image);
         /*
         draweeView.setImageURI(uri);*/
-        int width = 150, height = 150;
+        int width = 50, height = 50;
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
         .setResizeOptions(new ResizeOptions(width, height)).build();
         PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
