@@ -22,12 +22,12 @@ import java.util.Collections;
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Complaint> list = new ArrayList<>();
+    private int image[]={R.drawable.a,R.drawable.b,R.drawable.c,R.drawable.d,R.drawable.e,R.drawable.f,R.drawable.g,R.drawable.h};
+    private String imageText[];
 
-    public FeedAdapter(Context context1, ArrayList<Complaint> list1) {
+    public FeedAdapter(Context context1) {
         context = context1;
-        list = list1;
-        Collections.reverse(list1);
+        imageText = context.getResources().getStringArray(R.array.text);
     }
 
     @Override
@@ -39,24 +39,25 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.text.setText(imageText[position]);
+        holder.image.setImageResource(image[position]);
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return imageText.length;
     }
 
     protected  class ViewHolder extends RecyclerView.ViewHolder
     {
-        private TextView username;
-        private TextView title;
+        private TextView text;
+        private ImageView image;
 
         ViewHolder(View view)
         {
             super(view);
-            username =(TextView)view.findViewById(R.id.feed_username);
-            title =(TextView)view.findViewById(R.id.feed_title);
+            text =(TextView)view.findViewById(R.id.feed_text);
+            image = (ImageView)view.findViewById(R.id.feed_image);
         }
     }
 }

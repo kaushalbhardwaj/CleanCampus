@@ -22,14 +22,13 @@ public class Feed extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<Complaint> list = new ArrayList();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v;
         v=inflater.inflate(R.layout.fragment_feed, container, false);
         recyclerView = (RecyclerView)v.findViewById(R.id.recyler_feed);
-        adapter= new FeedAdapter(getActivity().getApplicationContext(),list);
+        adapter= new FeedAdapter(getActivity().getApplicationContext());
         linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
